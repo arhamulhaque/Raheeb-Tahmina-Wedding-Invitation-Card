@@ -1,0 +1,249 @@
+/* Reuse the original art, and animate only the elements that need to move. */
+html {
+  scrollbar-gutter: stable;
+}
+
+.folio-left,
+.folio-right,
+.seal-carrier {
+  transition-duration: 2.28s;
+}
+
+.folio-left,
+.seal-carrier {
+  transition-delay: .62s;
+}
+
+.folio-right {
+  transition-delay: .73s;
+}
+
+.folio-vellum {
+  transition-duration: 2.38s;
+}
+
+.folio-vellum-left {
+  transition-delay: .96s;
+}
+
+.folio-vellum-right {
+  transition-delay: 1.11s;
+}
+
+.folio-backdrop {
+  transition-duration: 1.12s;
+  transition-delay: .38s;
+}
+
+/* The paper and first lines are already visible as the leaves turn. */
+html.folio-ready .invitation-sheet {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1;
+}
+
+html.folio-reveal .invitation-topbar {
+  animation-duration: .45s;
+  animation-delay: .85s;
+}
+
+html.invitation-is-open .invitation-topbar {
+  animation: none;
+}
+
+@media (max-width: 650px) {
+  html.folio-ready .folio-cover {
+    perspective: none;
+    transform-style: flat;
+  }
+
+  .folio-leaf,
+  .folio-vellum,
+  .seal-carrier {
+    transform-style: flat;
+    backface-visibility: visible;
+  }
+
+  .folio-back {
+    display: none;
+  }
+
+  .folio-leaf,
+  .folio-vellum {
+    transition: transform 1.45s cubic-bezier(.47,.05,.22,1), opacity .95s ease-out;
+  }
+
+  .folio-backdrop {
+    transition-duration: 1.5s;
+    transition-delay: .55s;
+  }
+
+  html.folio-opening .folio-left {
+    transform: translateX(-2%) scaleX(.035);
+    opacity: 0;
+    transition-delay: .56s, 1.02s;
+  }
+
+  html.folio-opening .folio-right {
+    transform: translateX(2%) scaleX(.035);
+    opacity: 0;
+    transition-delay: .68s, 1.14s;
+  }
+
+  html.folio-opening .folio-vellum-left {
+    transform: translateX(-2%) scaleX(.04);
+    opacity: 0;
+    transition-delay: 1.13s, 1.53s;
+  }
+
+  html.folio-opening .folio-vellum-right {
+    transform: translateX(2%) scaleX(.04);
+    opacity: 0;
+    transition-delay: 1.23s, 1.63s;
+  }
+
+  html.folio-opening .seal-carrier {
+    transform: none;
+    transition: none;
+  }
+
+  html.folio-opening .folio-seal {
+    animation: phone-wax-release 1.05s cubic-bezier(.22,.65,.3,1) both;
+  }
+
+  html.folio-opening .satin-motion > g {
+    transform-box: fill-box;
+    animation: phone-silk-release 1.28s .22s cubic-bezier(.45,.07,.22,1) both;
+  }
+
+  html.folio-opening .satin-motion > g:first-of-type {
+    --silk-away: -120%;
+    --silk-turn: -4deg;
+    transform-origin: left center;
+  }
+
+  html.folio-opening .satin-motion > g:last-of-type {
+    --silk-away: 120%;
+    --silk-turn: 4deg;
+    transform-origin: right center;
+    animation-delay: .33s;
+  }
+
+  html.folio-reveal .invitation-topbar {
+    animation-delay: 2.34s;
+  }
+
+  /* Reveal the same SVG words with one short sweep per word. */
+  .ink-path {
+    animation: none !important;
+    fill-opacity: 1 !important;
+    stroke: none !important;
+  }
+
+  .motion-ready .script-reveal:not(.writing-visible) .writing-word {
+    opacity: 0;
+  }
+
+  .motion-ready .folio-print .writing-word,
+  .motion-ready .writing-visible .writing-word {
+    animation: phone-ink-write .82s var(--phone-ink-delay, var(--writing-start, .2s)) ease-out backwards;
+  }
+
+  .folio-names .writing-word {
+    --phone-ink-delay: .48s;
+  }
+
+  .folio-names > .name-line:last-child .writing-word {
+    --phone-ink-delay: .93s;
+  }
+
+  .motion-ready .motion-entered .word-reveal {
+    animation: none;
+    opacity: 1;
+  }
+
+  .motion-ready .motion-entered[data-motion='ink'] {
+    animation: phone-copy-arrive .78s ease-out both;
+  }
+
+  .motion-ready .motion-entered[data-motion='letter'] {
+    animation-name: phone-copy-arrive;
+  }
+
+  .motion-ready .motion-entered[data-motion='curtain'] {
+    animation-name: phone-curtain;
+  }
+
+  .motion-ready .motion-entered[data-motion='iris'] {
+    animation-name: phone-paper-arrive;
+  }
+
+  .motion-ready .event.motion-entered > :is(.event-tag,h3,.event-rule,.event-date,.event-time,.event-timezone,.event-venue,.event-address,.event-actions) {
+    animation: none;
+  }
+
+  .folio-soft-light,
+  .invitation-sheet::before,
+  .invitation-sheet::after,
+  .celebrations::before,
+  .celebration-engraving,
+  .gilt-sweep {
+    animation-iteration-count: 1;
+  }
+
+  .romantic-petal {
+    animation-name: phone-petal-fall;
+    will-change: auto;
+    filter: none !important;
+  }
+
+  .petal-face {
+    animation: none;
+    transform: none;
+  }
+}
+
+@keyframes phone-wax-release {
+  0% { opacity: 1; transform: translate(-50%,-50%) rotate(-5deg); }
+  23% { opacity: 1; transform: translate(-50%,-49%) rotate(-4.6deg) scale(.984); }
+  68% { opacity: .82; transform: translate(-56%,-52%) rotate(-6deg) scale(1.012); }
+  100% { opacity: 0; transform: translate(-66%,-55%) rotate(-8deg) scale(1.015); }
+}
+
+@keyframes phone-silk-release {
+  0% { opacity: 1; transform: translate(0,0) rotate(0); }
+  60% { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--silk-away),13px) rotate(var(--silk-turn)); }
+}
+
+@keyframes phone-paper-arrive {
+  from { opacity: .6; }
+  to { opacity: 1; }
+}
+
+@keyframes phone-ink-write {
+  from { opacity: .18; clip-path: inset(-.18em 100% -.16em -.20em); }
+  to { opacity: 1; clip-path: inset(-.18em -.16em -.16em -.20em); }
+}
+
+@keyframes phone-copy-arrive {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes phone-curtain {
+  from { opacity: .2; transform: translateX(-18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes phone-petal-fall {
+  0% { opacity: 0; transform: translate(0,0) rotate(var(--petal-start)) scaleX(.78); }
+  6% { opacity: var(--petal-opacity,.8); }
+  32% { transform: translate(calc(var(--petal-drift) * -.13),var(--petal-third)) rotate(var(--petal-mid)) scaleX(1); }
+  68% { opacity: var(--petal-opacity,.8); transform: translate(calc(var(--petal-drift) * .61),var(--petal-two-thirds)) rotate(var(--petal-late)) scaleX(.62); }
+  100% { opacity: 0; transform: translate(var(--petal-drift),var(--petal-distance)) rotate(var(--petal-end)) scaleX(.86); }
+}
+
+@media (max-width: 650px) and (prefers-reduced-motion: reduce) {
+  .writing-word { opacity: 1 !important; clip-path: none !important; }
+}

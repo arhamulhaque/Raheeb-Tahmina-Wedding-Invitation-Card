@@ -1,0 +1,24 @@
+/* Ruqaa lettering, composed as one continuous Arabic line. */
+@font-face{font-family:'Invitation Ruqaa';src:url('./aref-ruqaa-bismillah-v24.woff') format('woff');font-style:normal;font-weight:400;font-display:swap}
+.bismillah{font-family:'Invitation Ruqaa','Geeza Pro',serif;font-size:46px;line-height:1.7;padding-block:3px 8px;font-synthesis:none;white-space:nowrap!important;writing-mode:horizontal-tb!important;word-spacing:0;letter-spacing:0;color:#806139}
+@media(max-width:650px){
+ .bismillah{font-size:clamp(29px,8.6vw,37px);line-height:1.7;padding-block:4px 7px;margin-bottom:3px}
+ .satin-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:7;contain:strict}
+ .satin-canvas-ready .satin-motion{visibility:hidden!important}
+ .canvas-owned .writing-word{visibility:hidden;will-change:auto!important}
+ .canvas-owned.canvas-complete .writing-word{visibility:visible}
+ .folio-audio .sound-button{backdrop-filter:none;-webkit-backdrop-filter:none}
+ /* The original highlight, with a static artwork mask and a moving light layer. */
+ .gilt-art::after{content:none!important;animation:none!important}
+ .gilt-shimmer{position:absolute;inset:0;pointer-events:none;overflow:hidden;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;contain:strict;mix-blend-mode:screen}
+ .gilt-sweep{position:absolute;inset:0 auto 0 -45%;width:30%;background:linear-gradient(110deg,transparent,#fff0be 50%,transparent);opacity:0;transform:translate3d(0,0,0);animation:stationery-gold-reflection 17s 2.8s ease-in-out infinite;animation-play-state:paused}
+ .gilt-in-view .gilt-sweep{animation-play-state:running}
+ @keyframes stationery-gold-reflection{0%,12%{opacity:0;transform:translate3d(0,0,0)}15%{opacity:.26}32%{opacity:.26;transform:translate3d(650%,0,0)}36%,100%{opacity:0;transform:translate3d(650%,0,0)}}
+ /* Completed entrances become ordinary static content and release retained layers. */
+ .motion-ready .motion-complete{animation:none!important;transform:none!important;opacity:1!important;clip-path:none!important;will-change:auto!important}
+ .motion-ready .gilt-settled{animation:none!important;clip-path:none!important;will-change:auto!important}
+ .mobile-stationery #invitation-content>section.paint-managed{content-visibility:auto;contain:layout style paint}
+ .mobile-stationery .motion-sleep,.mobile-stationery .motion-sleep::before,.mobile-stationery .motion-sleep::after,.mobile-stationery .motion-sleep *,.mobile-stationery .motion-sleep *::before,.mobile-stationery .motion-sleep *::after{animation-play-state:paused!important}
+ html.invitation-paused .gilt-sweep{animation-play-state:paused!important}
+}
+@media(prefers-reduced-motion:reduce){.satin-canvas,.gilt-shimmer{display:none!important}.satin-canvas-ready .satin-motion{visibility:visible!important}.canvas-owned .writing-word{visibility:visible!important}}

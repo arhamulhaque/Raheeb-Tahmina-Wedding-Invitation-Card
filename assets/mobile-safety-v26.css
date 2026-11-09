@@ -1,0 +1,61 @@
+/* Keep the original stationery and reduce the size and lifetime of phone layers. */
+@media (max-width: 650px) {
+  html.folio-ready:not(.folio-reveal):not(.invitation-is-open) #invitation-content,
+  html.folio-ready:not(.folio-reveal):not(.invitation-is-open) .site-footer {
+    display: block;
+    visibility: hidden;
+  }
+
+  html.folio-ready:not(.invitation-is-open):not(.folio-opening) .folio-cover {
+    background-color: #193b2e;
+    perspective: none;
+  }
+
+  html.folio-ready.folio-opening:not(.invitation-is-open) .folio-cover {
+    height: var(--mobile-opening-height, 100svh);
+  }
+
+  .folio-front,
+  .folio-back {
+    transform-style: flat;
+  }
+
+  .folio-leaf,
+  .folio-vellum,
+  .seal-carrier,
+  .gilt-art.gilt-in-view,
+  .writing-word {
+    will-change: auto !important;
+  }
+
+  /* Keep the original book hinge with a layer the size of the wax seal. */
+  .seal-carrier {
+    inset: auto;
+    left: calc(50% - var(--seal-size) / 2);
+    top: calc(var(--seal-y) - var(--seal-size) / 2);
+    width: var(--seal-size);
+    height: var(--seal-size);
+    transform-origin: calc((var(--seal-size) - 100vw) / 2) center;
+  }
+
+  .seal-carrier .folio-seal {
+    top: 50%;
+    left: 50%;
+  }
+
+  body::after {
+    transform: none;
+    backface-visibility: visible;
+  }
+}
+
+html.folio-ready:not(.invitation-is-open) {
+  scroll-behavior: auto;
+}
+
+@media print {
+  html.folio-ready:not(.folio-reveal):not(.invitation-is-open) #invitation-content,
+  html.folio-ready:not(.folio-reveal):not(.invitation-is-open) .site-footer {
+    visibility: visible;
+  }
+}

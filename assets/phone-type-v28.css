@@ -1,0 +1,114 @@
+@font-face {
+  font-family: Alkalami;
+  src: url('./alkalami-regular-v25.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+.bismillah {
+  font-family: Alkalami, 'Geeza Pro', serif;
+  font-synthesis: none;
+}
+
+/* Keep the centered name geometry fixed and reveal its ink as a whole. */
+.motion-ready .families {
+  animation: none !important;
+  transform: none !important;
+}
+
+.motion-ready .families.reveal.waiting > div {
+  transform: none;
+}
+
+.person-name > .name-ink {
+  display: block;
+}
+
+.families > .groom-family {
+  min-inline-size: 0;
+}
+
+.families .person-name.groom-name {
+  max-inline-size: 100%;
+}
+
+.groom-name-line {
+  display: block;
+  width: min(100%, 9.014em);
+  height: auto;
+  margin-inline: auto;
+}
+
+.person-name .writing-word {
+  animation: none !important;
+  clip-path: none !important;
+  opacity: 1 !important;
+}
+
+.person-name .ink-path {
+  animation: none !important;
+  fill-opacity: 1 !important;
+  stroke: none !important;
+}
+
+.motion-ready .person-name:not(.writing-visible) > .name-ink {
+  opacity: 0;
+}
+
+.motion-ready .person-name.writing-visible > .name-ink {
+  animation: centered-name-reveal .72s cubic-bezier(.25,.65,.3,1);
+}
+
+@media (max-width: 650px) {
+  .bismillah {
+    font-size: clamp(28px, 8.4vw, 37px);
+    line-height: 1.6;
+    padding-block: 3px 5px;
+  }
+
+  .invitation .section-intro h2 {
+    font-size: clamp(33px, 9.2vw, 38px);
+    line-height: 1.11;
+  }
+
+  .invitation .section-intro .intro-text {
+    font-size: clamp(16px, 4.35vw, 18px);
+    line-height: 1.64;
+  }
+
+  .family-label {
+    font-size: 9px;
+  }
+
+  .family-parents {
+    font-size: clamp(15px, 4.12vw, 17px);
+    line-height: 1.64;
+  }
+
+  .families .person-name {
+    max-inline-size: 8.7em;
+    margin-inline: auto;
+    font-size: clamp(29px, 8.25vw, 36px);
+    line-height: 1.16;
+  }
+}
+
+@keyframes centered-name-reveal {
+  from {
+    opacity: .28;
+    clip-path: inset(-.17em 50% -.2em 50%);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(-.17em -.22em -.2em -.22em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .person-name > .name-ink {
+    animation: none !important;
+    opacity: 1 !important;
+    clip-path: none !important;
+  }
+}
